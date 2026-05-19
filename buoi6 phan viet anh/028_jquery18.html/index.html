@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thành viên</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        .box{
+            width: 500px;
+            border: 1px solid black;
+            padding: 20px;
+        }
+
+        input{
+            padding: 5px;
+            width: 250px;
+        }
+
+        button{
+            padding: 5px 10px;
+            margin: 5px;
+        }
+
+        li{
+            margin: 10px 0;
+        }
+
+        .edit{
+            background-color: orange;
+            color: white;
+            border: none;
+        }
+
+        .delete{
+            background-color: red;
+            color: white;
+            border: none;
+        }
+
+        .add{
+            background-color: green;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <h2>Quản lý danh sách thành viên</h2>
+
+        <input type="text" id="name" placeholder="Nhập tên thành viên">
+
+        <button id="addBtn" class="add">Thêm</button>
+
+        <ul id="list">
+            
+        </ul>
+
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            
+            $('#addBtn').click(function(){
+
+                let name = $('#name').val();
+
+                if(name != ""){
+
+                    $('#list').append(
+                        '<li>'
+                        + name +
+                        ' <button class="edit">Sửa</button>'
+                        + ' <button class="delete">Xóa</button>'
+                        + '</li>'
+                    );
+
+                    $('#name').val('');
+                }
+
+            });
+
+            
+            $('#list').on('click', '.delete', function(){
+
+                $(this).parent().remove();
+
+            });
+
+            
+            $('#list').on('click', '.edit', function(){
+
+                let oldName = $(this).parent().contents().first().text();
+
+                let newName = prompt("Nhập tên mới", oldName);
+
+                if(newName != ""){
+
+                    $(this).parent().html(
+                        newName +
+                        ' <button class="edit">Sửa</button>' +
+                        ' <button class="delete">Xóa</button>'
+                    );
+
+                }
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

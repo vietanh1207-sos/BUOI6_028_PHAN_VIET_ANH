@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng đơn giản</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        .box{
+            width: 500px;
+            border: 1px solid black;
+            padding: 20px;
+        }
+
+        .product{
+            border-bottom: 1px solid gray;
+            padding: 15px 0;
+        }
+
+        button{
+            padding: 5px 10px;
+            margin: 5px;
+        }
+
+        input{
+            width: 40px;
+            text-align: center;
+        }
+
+        h2{
+            color: blue;
+        }
+
+        .plus{
+            background-color: green;
+            color: white;
+            border: none;
+        }
+
+        .minus{
+            background-color: red;
+            color: white;
+            border: none;
+        }
+
+        .total-box{
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <h2>Giỏ hàng online</h2>
+
+        <!-- sản phẩm 1 -->
+        <div class="product">
+
+            <p>Tên sản phẩm: Áo thun</p>
+
+            <p>Đơn giá: 
+                <span class="price">100000</span> VNĐ
+            </p>
+
+            <button class="minus">-</button>
+
+            <input type="text" class="quantity" value="1" readonly>
+
+            <button class="plus">+</button>
+
+            <p>Thành tiền: 
+                <span class="money">100000</span> VNĐ
+            </p>
+
+        </div>
+
+        <!-- sản phẩm 2 -->
+        <div class="product">
+
+            <p>Tên sản phẩm: Quần jean</p>
+
+            <p>Đơn giá: 
+                <span class="price">200000</span> VNĐ
+            </p>
+
+            <button class="minus">-</button>
+
+            <input type="text" class="quantity" value="1" readonly>
+
+            <button class="plus">+</button>
+
+            <p>Thành tiền: 
+                <span class="money">200000</span> VNĐ
+            </p>
+
+        </div>
+
+        <!-- sản phẩm 3 -->
+        <div class="product">
+
+            <p>Tên sản phẩm: Giày thể thao</p>
+
+            <p>Đơn giá: 
+                <span class="price">300000</span> VNĐ
+            </p>
+
+            <button class="minus">-</button>
+
+            <input type="text" class="quantity" value="1" readonly>
+
+            <button class="plus">+</button>
+
+            <p>Thành tiền: 
+                <span class="money">300000</span> VNĐ
+            </p>
+
+        </div>
+
+        <!-- tổng -->
+        <div class="total-box">
+
+            <p>Tổng số lượng: 
+                <span id="totalQuantity">3</span>
+            </p>
+
+            <p>Tổng hóa đơn: 
+                <span id="totalBill">600000</span> VNĐ
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            // hàm tính tổng
+            function updateCart(){
+
+                let totalBill = 0;
+                let totalQuantity = 0;
+
+                $('.product').each(function(){
+
+                    let price = Number($(this).find('.price').text());
+
+                    let quantity = Number($(this).find('.quantity').val());
+
+                    let money = price * quantity;
+
+                    $(this).find('.money').text(money);
+
+                    totalBill += money;
+
+                    totalQuantity += quantity;
+
+                });
+
+                $('#totalBill').text(totalBill);
+
+                $('#totalQuantity').text(totalQuantity);
+
+            }
+
+            // nút tăng
+            $('.plus').click(function(){
+
+                let quantityInput = $(this).prev('.quantity');
+
+                let quantity = Number(quantityInput.val());
+
+                quantity++;
+
+                quantityInput.val(quantity);
+
+                updateCart();
+
+            });
+
+            // nút giảm
+            $('.minus').click(function(){
+
+                let quantityInput = $(this).next('.quantity');
+
+                let quantity = Number(quantityInput.val());
+
+                if(quantity > 1){
+
+                    quantity--;
+
+                    quantityInput.val(quantity);
+
+                    updateCart();
+
+                }
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

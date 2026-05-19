@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ đếm tương tác</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        .box{
+            width: 350px;
+            border: 1px solid black;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2{
+            color: blue;
+        }
+
+        #number{
+            font-size: 40px;
+            margin: 20px 0;
+        }
+
+        button{
+            padding: 8px 15px;
+            margin: 5px;
+        }
+
+        .plus{
+            background-color: green;
+            color: white;
+            border: none;
+        }
+
+        .minus{
+            background-color: red;
+            color: white;
+            border: none;
+        }
+
+        .reset{
+            background-color: gray;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <h2>Bộ đếm tương tác</h2>
+
+        <div id="number">0</div>
+
+        <button id="plusBtn" class="plus">Tăng +1</button>
+
+        <button id="minusBtn" class="minus">Giảm -1</button>
+
+        <button id="resetBtn" class="reset">Đặt lại</button>
+
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            let count = 0;
+
+        
+            function updateNumber(){
+
+                $('#number').text(count);
+
+                // đổi màu số
+                if(count > 0){
+
+                    $('#number').css('color','green');
+
+                }
+                else if(count < 0){
+
+                    $('#number').css('color','red');
+
+                }
+                else{
+
+                    $('#number').css('color','black');
+
+                }
+
+            }
+
+            
+            $('#plusBtn').click(function(){
+
+                count++;
+
+                updateNumber();
+
+            });
+
+            $('#minusBtn').click(function(){
+
+                count--;
+
+                updateNumber();
+
+            });
+
+            $('#resetBtn').click(function(){
+
+                count = 0;
+
+                updateNumber();
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
